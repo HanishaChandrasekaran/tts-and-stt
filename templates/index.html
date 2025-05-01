@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Text to Speech & Speech to Text</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Basic resets */
+        body, h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #42a5f5, #ff80ab);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subheading {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .function-selection {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 20px;
+        }
+
+        .choice-btn {
+            background-color: #f44336;
+            color: white;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 45%;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .choice-btn:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .choice-btn:active {
+            background-color: #b71c1c;
+            transform: scale(0.98);
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-label:hover {
+            background-color: #388e3c;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .upload-btn {
+            background-color: #2196f3;
+            color: white;
+            font-size: 1.1em;
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .upload-btn:hover {
+            background-color: #1976d2;
+        }
+
+        .speech-btn {
+            background-color: #ff9800;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .speech-btn:hover {
+            background-color: #f57c00;
+            transform: scale(1.05);
+        }
+
+        .result-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+        }
+
+        .result-section p {
+            font-size: 1.2em;
+        }
+
+        .audio-player {
+            margin-top: 20px;
+            width: 100%;
+            background: #4caf50;
+        }
+
+        .error {
+            color: #f44336;
+            margin-top: 20px;
+        }
+
+        #stt-text {
+            font-size: 1.5em;
+            color: #ffeb3b;
+            margin-top: 20px;
+        }
+
+        .textarea-container {
+            margin-top: 20px;
+        }
+
+        .textarea-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            min-height: 100px;
+            background-color: #f0f0f0;
+        }
+
+        .textarea-input:focus {
+            border-color: #ffeb3b;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Welcome to Image Text-to-Speech & Speech-to-Text</h1>
+            <p class="subheading">Choose an option to proceed.</p>
+        </header>
+
+        <!-- Buttons for selecting between TTS and STT -->
+        <section class="function-selection">
+            <button class="btn choice-btn" onclick="showTTSForm()">Text-to-Speech (TTS)</button>
+            <button class="btn choice-btn" onclick="showSTTForm()">Speech-to-Text (STT)</button>
+        </section>
+
+        <!-- Text-to-Speech Section -->
+        <section class="tts-section" id="tts-section" style="display:none;">
+            <h2>Choose a Method for Text-to-Speech:</h2>
+
+            <!-- Option 1: Upload Image -->
+            <button class="upload-btn" onclick="showImageUploadForm()">Upload Image for Text Extraction</button>
+
+            <!-- Option 2: Type Text -->
+            <div class="textarea-container" style="margin-top: 20px;">
+                <h3>Type Text for Conversion to Speech:</h3>
+                <textarea id="typed-text" class="textarea-input" placeholder="Enter text here..."></textarea>
+                <button class="upload-btn" onclick="convertTypedText()">Convert Text to Speech</button>
+            </div>
+        </section>
+
+        <!-- Speech-to-Text Section -->
+        <section class="speech-to-text" id="stt-section" style="display:none;">
+            <h2>Convert Speech to Text (STT)</h2>
+            <button onclick="startSpeechToText()" class="speech-btn"><i class="fas fa-microphone"></i> Start Speaking</button>
+            <div id="stt-result">
+                <h3>Recognized Text:</h3>
+                <p id="stt-text">Your speech-to-text result will appear here.</p>
+            </div>
+        </section>
+
+        <!-- Display results for TTS -->
+        {% if text %}
+        <section class="result-section">
+            <h2>Extracted Text:</h2>
+            <p>{{ text }}</p>
+            <h3>Click to Listen:</h3>
+            <audio controls class="audio-player">
+                <source src="{{ url_for('static', filename='output_audio.mp3') }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+        </section>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Function to show the TTS upload form
+        function showTTSForm() {
+            document.getElementById('tts-section').style.display = 'block';
+            document.getElementById('stt-section').style.display = 'none';
+        }
+
+        // Function to show the STT speech recognition button
+        function showSTTForm() {
+            document.getElementById('stt-section').style.display = 'block';
+            document.getElementById('tts-section').style.display = 'none';
+        }
+
+        // Function to show image upload form
+        function showImageUploadForm() {
+            document.getElementById('tts-section').innerHTML = `
+                <h2>Upload Image for Text Extraction (TTS)</h2>
+                <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+                    <label for="file" class="file-label">
+                        <i class="fas fa-upload"></i> Upload Image (JPG, PNG, JPEG)
+                    </label>
+                    <input type="file" name="file" id="file" required class="file-input">
+                    <button type="submit" class="upload-btn">Upload Image</button>
+                </form>
+            `;
+        }
+
+        // Function to convert typed text to speech
+        function convertTypedText() {
+            const typedText = document.getElementById('typed-text').value;
+            if (typedText.trim()) {
+                fetch('/convert-text-to-speech', {
+                    method: 'POST',
+                    body: JSON.stringify({ text: typedText }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.audioPath) {
+                        window.location.href = data.audioPath;
+                    }
+                });
+            }
+        }
+
+        // Simulating speech-to-text functionality
+        function startSpeechToText() {
+            // Logic to start speech recognition
+            console.log("Speech to text started");
+            // Just for example, you can replace it with actual Web Speech API functionality
+            document.getElementById('stt-text').innerText = 'Recognized speech will be shown here.';
+        }
+    </script>
+
+</body>
+</html>

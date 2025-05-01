@@ -1,0 +1,128 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+h1 {
+  font-size: 36px;
+  color: #007bff;
+}
+.subheading {
+  font-size: 18px;
+  color: #6c757d;
+  margin-top: 10px;
+}
+
+/* Upload Section */
+.upload-section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+.upload-section h2 {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.file-label {
+  font-size: 16px;
+  color: #007bff;
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e2e6ea;
+  border-radius: 5px;
+}
+.file-input {
+  display: none;
+}
+.upload-btn {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.upload-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Result Section */
+.result-section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+.extracted-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.audio-player {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+}
+
+/* Speech-to-Text Section */
+.speech-to-text {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.speech-btn {
+  background-color: #28a745;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.speech-btn:hover {
+  background-color: #218838;
+}
+#stt-result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #495057;
+}
+
+/* Error Message */
+.error {
+  color: #dc3545;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+}
